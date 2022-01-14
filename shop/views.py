@@ -31,7 +31,8 @@ def news(request):
 
 
 def shop(request):
-    return render(request, 'shop.html')
+    products = Product.objects.all()
+    return render(request, 'shop.html', context={'products': products})
 
 
 def single_news(request):
