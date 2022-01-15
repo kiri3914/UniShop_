@@ -2,10 +2,12 @@ from django.urls import path
 from .views import (
     index, about,
     cart, checkout,
-    contact, news, shop,
-    single_news, single_product)
+    contact, news, single_news, single_product,
+    ShopView, shop
+    )
 
 urlpatterns = [
+    path('a/', ShopView.as_view(), name='article-list'),
     path('', index, name='index'),
     path('about/', about, name='about'),
     path('cart/', cart, name='cart'),

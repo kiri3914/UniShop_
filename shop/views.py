@@ -1,6 +1,6 @@
+from django.utils import timezone
 from django.shortcuts import render
-from .models import \
-    Category, Product, CartProduct, Cart, Customer, Order
+from .models import Category, Product, CartProduct, Cart, Customer, Order
 
 from django.views.generic import ListView
 
@@ -26,13 +26,26 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+def shop(request):
+    products = Product.objects.all()
+    return render(request, 'shop.html', context={'products': products})
+
+
 def news(request):
     return render(request, 'news.html')
 
 
-def shop(request):
+class ShopView(ListView):
     products = Product.objects.all()
-    return render(request, 'shop.html', context={'products': products})
+    model = Product
+    paginate_by = 15  # if pagination is desired
+    template_name = 'index_2.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+    # return render(request, 'shop.html', context={'products': products})
 
 
 def single_news(request):

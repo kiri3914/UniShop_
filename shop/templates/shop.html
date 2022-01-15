@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load teg %}
 {% block content %}
 <!-- breadcrumb-section -->
 <div class="breadcrumb-section breadcrumb-bg">
@@ -26,7 +26,8 @@
                 <div class="product-filters">
                     <ul>
                         <li class="active" data-filter="*">All</li>
-                        <li data-filter=".strawberry">Strawberry</li>
+
+                        <li data-filter=".strawberry">strawberry</li>
                         <li data-filter=".berry">Berry</li>
                         <li data-filter=".lemon">Lemon</li>
                     </ul>

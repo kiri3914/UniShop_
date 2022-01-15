@@ -24,6 +24,7 @@ class Product(models.Model):
     image = models.ImageField(verbose_name='Изображение')
     description = models.TextField(verbose_name='Описание', null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена')
+    data_create = models.DateField(auto_created=False, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -31,8 +32,10 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'slug': self.slug})
 
-    def get_features(self):
-        return {f.feature.feature_name: ' '.join([f.value, f.feature.unit or ""]) for f in self.features.all()}
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
+        ordering = ['-data_create']
 
 
 class CartProduct(models.Model):
